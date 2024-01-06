@@ -13,23 +13,17 @@ const BookDetailsPage = () => {
   const handleAddToCart = () => { dispatch(addToCart(data)) }
   
   return (
-    <Grid container spacing={2} columns={16}>
-  <Grid item xs={8}>
-    <Box component="img"
-   sx={{
-        border: 0 ,
-        position: 'absolute',
-        width: '50%',
-        height: '100%',
-        backgroundImage: `url(${data?.image})` ,
-        backgroundPosition: 'center',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat'
-      }}>
+    <Grid container  columns={16}>
+  <Grid item xs={16} sm={16} md={8} lg={8}>
+    <Box component="img" sx={{
+        border: 0 ,width: '100%',height: '600px',backgroundImage: `url(${data?.image})` ,
+        backgroundPosition: 'center',backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat'}}>
 
     </Box>
+
   </Grid>
-  <Grid item xs={8}>
+  <Grid item xs={16} sm={16} md={8} lg={8}>
     <Box padding={10} textAlign='center'>
       <Typography  variant="h4" color='gray.800'
         sx={{ textDecoration: 'none',textDecorationColor:'gray.900',my: '2rem'  }}>

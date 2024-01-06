@@ -16,8 +16,10 @@ const CartItem = ({product}:Props) => {
               <Avatar src={product.image} 
               sx={{ objectFit: "cover" , width: 150, height: 150 }}/>
             </ListItemAvatar>
-              <ListItemText sx={{ mx: '30px' }} primary={product.title.split(' ').slice(0,3).join(" ")}
+             <Box display={{ xs: 'none', sm: 'block' }}>
+               <ListItemText  sx={{ mx: '30px' }} primary={product.title.split(' ').slice(0,3).join(" ")}
               secondary={`$${(product.price* product.quantity).toFixed(2)}`} />
+             </Box>
               <ListItemText sx={{ mx: '30px' }} primary={product.quantity} />
               <Box sx={{ mx: '2px' }}>
                 <Button variant="contained" color="secondary"
