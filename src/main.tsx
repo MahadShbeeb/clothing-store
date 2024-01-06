@@ -15,8 +15,8 @@ export const darkTheme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Chilanka',
-      'cursive',
+      'Montserrat',
+      'mono',
     ].join(','),
   }
 });
