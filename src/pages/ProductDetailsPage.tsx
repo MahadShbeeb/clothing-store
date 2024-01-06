@@ -6,7 +6,7 @@ import { addToCart } from '../store/cartSlice';
 
 const BookDetailsPage = () => {
   const {id} = useParams()
-  const {data} = useProduct(parseInt(id))
+  const {data} = useProduct(id!);
   // const [isFav,setIsFav] = useState(false)
   
   const dispatch = useDispatch()
@@ -16,7 +16,7 @@ const BookDetailsPage = () => {
     <Grid container  columns={16}>
   <Grid item xs={16} sm={16} md={8} lg={8}>
     <Box component="img" sx={{
-        border: 0 ,width: '100%',height: '600px',backgroundImage: `url(${data?.image})` ,
+        border: 0 ,width: '100%',height: '700px',backgroundImage: `url(${data?.image})` ,
         backgroundPosition: 'center',backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat'}}>
 
