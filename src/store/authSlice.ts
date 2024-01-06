@@ -1,31 +1,45 @@
 import { createSlice , createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword ,signOut } from 'firebase/auth';
+import { firebaseAuth } from '../firebase/BaseConfig';
+import { AppThunk } from '../store/store';
 
-export interface User {
+
+export const signUpUser= createAsyncThunk(
+  'user/signupuser',
+  async (userCredentials : AuthUser) => {
+    const result = await createUserWithEmailAndPassword(firebaseAuth, userCredentials.email, userCredentials.password);
+    const {user} = result
+    localStorage.setItem('auth',JSON.stringify(user.refreshToken))
+    return user
+  }
+)
+
+export const loginUser= createAsyncThunk(
+  'user/loginuser',
+  async (userCredentials : AuthUser) => {
+    const result = await signInWithEmailAndPassword(firebaseAuth, userCredentials.email, userCredentials.password);
+    const { user } = result;
+    localStorage.setItem('auth',JSON.stringify(result.user.refreshToken))
+    return user
+  }
+)
+
+export const logoutUser =(): AppThunk => async (dispatch)=> {
+    await signOut(firebaseAuth);
+    dispatch(logout());
+};
+
+export interface AuthUser {
   email: string;
   password: string;
 }
 
-export const loginUser= createAsyncThunk(
-  'user/loginUser',
-  async (userCredentials : User) => {
-    const request = await axios.post('https://fakestoreapi.com/auth/login',{
-                username: "mor_2314",
-                password: "83r5^_"
-            })
-    const respond = await request.data.token
-    localStorage.setItem('auth',JSON.stringify(respond))
-    console.log(userCredentials)
-    return respond;
-  }
-)
-
-export interface Auth {
-  user: User | null;
+export interface AuthState {
+  user: AuthUser | null;
   isAuthenticated: boolean;
 }
 
-const initialState: Auth = {
+const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
 };
@@ -33,19 +47,21 @@ const initialState: Auth = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers:{},
-  extraReducers:(builder)=>{
-    builder.addCase(loginUser.pending, (state) => {
-      state.isAuthenticated = true
-      state.user = null
-    }).addCase(loginUser.fulfilled, (state , action) => {
-      state.isAuthenticated = true
-      state.user = action.payload
-    }).addCase(loginUser.rejected, (state) => {
-      state.isAuthenticated = false
-      state.user = null
-    })
-  }
+  reducers:{ 
+    login: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
+    signup: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.isAuthenticated = false;
+    },
+  },
 });
+export const { login,signup,logout} = authSlice.actions;
 
 export const authReducer =  authSlice.reducer;

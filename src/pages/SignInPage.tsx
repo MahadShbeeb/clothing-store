@@ -2,7 +2,7 @@ import {Avatar,Button,CssBaseline,TextField,FormControlLabel,Grid,Box,Checkbox,C
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../store/authSlice';
+import { login, loginUser } from '../store/authSlice';
 import { useState } from 'react';
 import { AppDispatch } from '../store/store';
 
@@ -16,13 +16,15 @@ export default function SignInPage() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(loginUser({ email, password })).then(result=>{
+    dispatch(loginUser({email, password })).then((result)=>{
       if (result.payload){
+        dispatch(login({ email, password }))
         setEmail('')
         setPassword('')
         navigate('/profile')
-      }
+        }
     })
+
   };
 
   return (
@@ -41,7 +43,8 @@ export default function SignInPage() {
               onChange={(e) => setEmail(e.target.value)} 
             />
             <TextField margin="normal" required fullWidth name="password" label="Password"
-              type="password" id="password" autoComplete="current-password" value={password}
+              type="password" id="password" autoComplete="current-password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel

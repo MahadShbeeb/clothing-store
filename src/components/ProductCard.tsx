@@ -8,7 +8,7 @@ interface Props{
 
 const ProductCard = ({product}:Props) => {
   return (
-  <Card sx={{ maxWidth: 345 ,shadow : 'lg',borderRadius:'10px'}} >
+  <Card sx={{ maxWidth: 345 ,borderRadius:'10px'}} >
     <CardMedia component="img" image={product.image} height ='200px'
       sx={{ padding: "10px", objectFit: "contain" }}/>
 
