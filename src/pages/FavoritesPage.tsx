@@ -1,14 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Grid, Typography, Box } from "@mui/material";
 import ProductCard from "../components/ProductCard";
-import { removeFromFavorites } from "../store/favoritesSlice";
 
 const FavoritesPage = () => {
   const favorites = useSelector(
     (state: RootState) => state.favorites.favorites
   );
-  const dispatch = useDispatch();
 
   return (
     <Box sx={{ padding: "40px" }}>

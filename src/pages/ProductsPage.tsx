@@ -63,19 +63,20 @@ const Products = () => {
   return (
     <Container maxWidth="xl">
       <Paper
-        elevation={3}
+        elevation={0}
         sx={{
           mb: 4,
           mt: 2,
           p: 3,
-          backgroundColor: "secondary.main",
-          color: "secondary.contrastText",
+          backgroundColor: "transparent",
+          color: "black",
         }}
       >
         <Grid container spacing={3} alignItems="center">
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={4}>
             <TextField
               fullWidth
+              size="small"
               label="Search Products"
               variant="outlined"
               value={searchQuery}
@@ -84,27 +85,30 @@ const Products = () => {
                 "& .MuiOutlinedInput-root": {
                   backgroundColor: "transparent",
                   "& fieldset": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "&:hover fieldset": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                 },
                 "& .MuiInputLabel-root": {
-                  color: "secondary.contrastText",
+                  color: "black",
+                  fontSize: "0.9rem",
                 },
                 "& .MuiInputBase-input": {
-                  color: "secondary.contrastText",
+                  color: "black",
+                  fontSize: "0.9rem",
+                  padding: "8px 14px",
                 },
               }}
             />
           </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl fullWidth>
-              <InputLabel sx={{ color: "secondary.contrastText" }}>
+          <Grid item xs={12} md={4}>
+            <FormControl fullWidth size="small">
+              <InputLabel sx={{ color: "black", fontSize: "0.9rem" }}>
                 Category
               </InputLabel>
               <Select
@@ -112,23 +116,28 @@ const Products = () => {
                 label="Category"
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 sx={{
-                  color: "secondary.contrastText",
+                  color: "black",
+                  fontSize: "0.9rem",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "& .MuiSvgIcon-root": {
-                    color: "secondary.contrastText",
+                    color: "black",
                   },
                 }}
               >
                 {categories.map((category) => (
-                  <MenuItem key={category} value={category}>
+                  <MenuItem
+                    key={category}
+                    value={category}
+                    sx={{ fontSize: "0.9rem" }}
+                  >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
                   </MenuItem>
                 ))}
@@ -136,8 +145,8 @@ const Products = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} md={4}>
-            <FormControl fullWidth>
-              <InputLabel sx={{ color: "secondary.contrastText" }}>
+            <FormControl fullWidth size="small">
+              <InputLabel sx={{ color: "black", fontSize: "0.9rem" }}>
                 Sort By
               </InputLabel>
               <Select
@@ -145,26 +154,37 @@ const Products = () => {
                 label="Sort By"
                 onChange={(e) => setSortBy(e.target.value)}
                 sx={{
-                  color: "secondary.contrastText",
+                  color: "black",
+                  fontSize: "0.9rem",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "secondary.contrastText",
+                    borderColor: "black",
                   },
                   "& .MuiSvgIcon-root": {
-                    color: "secondary.contrastText",
+                    color: "black",
                   },
                 }}
               >
-                <MenuItem value="default">Default</MenuItem>
-                <MenuItem value="price-asc">Price: Low to High</MenuItem>
-                <MenuItem value="price-desc">Price: High to Low</MenuItem>
-                <MenuItem value="name-asc">Title: A to Z</MenuItem>
-                <MenuItem value="name-desc">Title: Z to A</MenuItem>
+                <MenuItem value="default" sx={{ fontSize: "0.9rem" }}>
+                  Default
+                </MenuItem>
+                <MenuItem value="price-asc" sx={{ fontSize: "0.9rem" }}>
+                  Price: Low to High
+                </MenuItem>
+                <MenuItem value="price-desc" sx={{ fontSize: "0.9rem" }}>
+                  Price: High to Low
+                </MenuItem>
+                <MenuItem value="name-asc" sx={{ fontSize: "0.9rem" }}>
+                  Title: A to Z
+                </MenuItem>
+                <MenuItem value="name-desc" sx={{ fontSize: "0.9rem" }}>
+                  Title: Z to A
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid>
